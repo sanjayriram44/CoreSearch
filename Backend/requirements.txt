@@ -24,3 +24,5 @@ langgraph
 fastapi
 pymongo
 dnspython
+gunicorn
+uvicorn

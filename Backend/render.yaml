@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: coresearch-backend
+    env: python
+    plan: free
+    buildCommand: ""
+    startCommand: ./start.sh
+    envVars:
+      - key: MONGO_URL
+        value: your_mongo_url_here
+      - key: GROQ_API_KEY
+        value: your_groq_key_here
