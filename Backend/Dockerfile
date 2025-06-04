@@ -1,16 +1,20 @@
+# Use slim Python as base
 FROM python:3.10-slim
 
-# Set working directory
+# Set working dir
 WORKDIR /app
 
-# Copy everything into the container
-COPY . /app
+# Copy dependencies
+COPY requirements.txt .
 
-# Install dependencies
-RUN pip install --upgrade pip && pip install -r requirements.txt
+# Install deps
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose default Streamlit port
-EXPOSE 8501
+# Copy all source code
+COPY . .
 
-# Run the app
-CMD ["streamlit", "run", "main.py", "--server.port=8501", "--server.address=0.0.0.0"]
+# Expose the port your app will run on
+EXPOSE 10000
+
+# Start FastAPI using uvicorn
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "10000"]
